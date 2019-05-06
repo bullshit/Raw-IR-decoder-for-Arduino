@@ -98,6 +98,7 @@ void setup(void) {
   Serial.println(F("* '3' for Mitsubishi Heavy etc. codes"));
   Serial.println(F("* '4' for Hyundai etc. codes"));
   Serial.println(F("* '5' for Samsung etc. codes"));
+  Serial.println(F("* '6' for Gree etc. codes"));
   Serial.println(F("* '9' for entering the bit sequence on the serial monitor (instead of the IR receiver)"));
   Serial.println();
   Serial.print(F("Enter choice: "));
@@ -123,6 +124,9 @@ void setup(void) {
           break;
         case '5':
           modelChoice = 5;
+          break;
+        case '6':
+          modelChoice = 6;
           break;
         case '9':
           modelChoice = 9;
@@ -160,6 +164,11 @@ void setup(void) {
     SPACE_THRESHOLD_ZERO_ONE     =  800;
     SPACE_THRESHOLD_ONE_HEADER   = 2400;
     SPACE_THRESHOLD_HEADER_PAUSE = 10000;
+  } else if (modelChoice == 6) {
+    MARK_THRESHOLD_BIT_HEADER    = 2000; // Value between BIT MARK (620) and HEADER MARK (9000)
+    SPACE_THRESHOLD_ZERO_ONE     =  800;  // Value between ZERO SPACE (540) and ONE SPACE (1600)
+    SPACE_THRESHOLD_ONE_HEADER   = 2400;  // Value between ONE SPACE (1600) and HEADER SPACE (4500)
+    SPACE_THRESHOLD_HEADER_PAUSE = 19000; // Value between HEADER SPACE and PAUSE SPACE (Panasonic/Midea only)
   }
 }
 
